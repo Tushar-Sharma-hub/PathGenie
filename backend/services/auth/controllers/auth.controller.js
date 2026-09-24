@@ -41,7 +41,11 @@ export const GoogleAuth = async (req,res) => {
         return res.status(200).json({success:true,user});
 
     }catch(error){
-        return res.status(500).json("Google auth error.",error);
+        return res.status(500).json({
+            success: false,
+            message: "Google auth error.",
+            error: error.message
+        });
     }
 }
 
