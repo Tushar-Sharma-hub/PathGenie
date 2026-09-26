@@ -9,7 +9,7 @@ export const isAuth = async (req,res,next)=>{
             res.status(401).json({message:"Unauthorized"})
         }
 
-        const session = redis.get(`session:${sessionId}`)
+        const session = await redis.get(`session:${sessionId}`)
 
         if(!session){
             res.status(401).json({message:"Session expired."})

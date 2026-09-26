@@ -4,7 +4,7 @@ import { GiArtificialHive } from 'react-icons/gi'
 import { FaArrowRight } from 'react-icons/fa6'
 import LoginModel from '../components/LoginModel'
 
-function Home() {
+function Home({setUser}) {
     const [showLogin,setShowLogin] = useState(false)
     return (
         <div className='bg-white text-[#0A0A0A] font-sans min-h-screen overflow-x-hidden'>
@@ -46,7 +46,7 @@ function Home() {
 
             </section>
 
-            {showLogin && <LoginModel onClose={()=>setShowLogin(false)}/>}
+            {showLogin && <LoginModel onClose={()=>setShowLogin(false)} setUser={setUser}/>}
 
         </div>
     )
