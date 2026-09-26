@@ -4,6 +4,8 @@ import proxy from "express-http-proxy"
 import cors from "cors"
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import { getCurrentUser } from "./controllers/user.controller.js";
+import { isAuth } from "./middleware/isAuth.js";
 dotenv.config();
 
 const app = express();
@@ -23,6 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", proxy(process.env.AUTH_SERVICE_URL));
+app.use("/api/me",isAuth , getCurrentUser) //first will authorize and put user data in req.user then we can use it in getCurrentUser fxn in controller to fetch data easily.
 
 app.listen(PORT, () => {
   console.log(`Gateway started on port ${PORT}`);
