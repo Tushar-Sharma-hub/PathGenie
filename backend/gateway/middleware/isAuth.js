@@ -1,5 +1,6 @@
 import redis from "../../shared/redis/redis.js"
 
+//Get the session id from cookies 
 
 export const isAuth = async (req,res,next)=>{
     try {

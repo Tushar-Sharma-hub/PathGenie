@@ -31,7 +31,7 @@ function Home({ setUser }) {
                     </div>
 
                     <span className='font-extrabold text-base tracking-tight text-[#0A0A0A]'>
-                        FresherAI
+                        PathGenie
                     </span>
 
                 </div>
