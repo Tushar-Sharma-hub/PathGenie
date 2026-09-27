@@ -1,6 +1,7 @@
 function Dashboard({user,setUser}) {
+    console.log(user);
     return (
-        <div>
+        <div className="text-black">
             {user.name}
         </div>
     )
