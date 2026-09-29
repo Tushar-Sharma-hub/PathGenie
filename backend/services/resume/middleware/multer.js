@@ -1,6 +1,8 @@
+//Used for uploading checking resume validity and upload it using multer storage.
+
 import fs from "fs"
 import multer from "multer"
-const uploadPath = "../uploads"
+const uploadPath = "./uploads"
 
 if(!fs.existsSync(uploadPath)){
 fs.mkdirSync(uploadPath)
