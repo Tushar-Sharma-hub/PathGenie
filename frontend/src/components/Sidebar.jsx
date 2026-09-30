@@ -49,7 +49,7 @@ function Sidebar({
                             initial={{ opacity: 0, x: -6 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.15 }}
-                            className='font-extrabold text-sm tracking-tight text-[#0A0A0A] whitespace-nowrap'>FresherAI</motion.span>
+                            className='font-extrabold text-sm tracking-tight text-[#0A0A0A] whitespace-nowrap'>PathGenie</motion.span>
 
                     </div>
                 )}

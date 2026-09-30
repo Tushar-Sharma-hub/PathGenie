@@ -51,7 +51,7 @@ function ResumeBuilder({user , setUser}) {
             <div className='mx-auto flex h-12 max-w-7xl items-center justify-between px-3 sm:px-5'>
                 <div onClick={()=>navigate("/dashboard")}
                  className='flex cursor-pointer items-center gap-1.5'>
-                    <span className='text-sm font-extrabold sm:text-base text-[#0A0A0A]'>FresherAI</span>
+                    <span className='text-sm font-extrabold sm:text-base text-[#0A0A0A]'>PathGenie</span>
                     <span className='hidden rounded bg-black/5 px-1.5 py-0.5 text-[10px] text-black/50 sm:block'>Resume Builder</span>
                 </div>
 

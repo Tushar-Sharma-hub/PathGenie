@@ -24,7 +24,7 @@ function Home({ setUser }) {
                     <div className='w-7 h-7 rounded-lg bg-[#0A0A0A] flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.18)]'>
                         <GiArtificialHive size={15} color='white' /></div>
 
-                    <span className='font-extrabold text-base tracking-tight text-[#0A0A0A]'>FresherAI</span>
+                    <span className='font-extrabold text-base tracking-tight text-[#0A0A0A]'>PathGenie</span>
                 </div>
 
                 <motion.button
@@ -69,7 +69,7 @@ function Home({ setUser }) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.55, delay: 0.2 }}
                         className='text-black/45 text-sm leading-relaxed max-w-md mx-auto mb-6 [text-shadow:0_2px_10px_rgba(0,0,0,0.06)]'>
-                        Fresher.AI is an innovative AI-powered interview preparation platform
+                        PathGenie is an innovative AI-powered interview preparation platform
                         designed to help job seekers excel in their interviews.
                     </motion.p>
 
@@ -118,7 +118,7 @@ function Home({ setUser }) {
                         </h2>
 
                         <p className='text-black/40 text-sm max-w-2xl mx-auto mt-4 leading-relaxed'>
-                            Fresher.AI combines multiple AI agents that work together
+                            PathGenie combines multiple AI agents that work together
                             to help you build your resume, practice interviews,
                             receive detailed feedback, and follow a personalized roadmap
                             to land your dream job.
@@ -183,10 +183,10 @@ function Home({ setUser }) {
                         <GiArtificialHive size={11} color='white'/>
 
                     </div>
-                    <span className='font-bold text-xs text-[#0A0A0A]/70'>FresherAI</span>
+                    <span className='font-bold text-xs text-[#0A0A0A]/70'>PathGenie</span>
                 </div>
                 <div className='text-black/50 text-xs'>
-                © {new Date().getFullYear()} Fresher.AI · All rights reserved
+                © {new Date().getFullYear()} PathGenie · All rights reserved
                 </div>
 
                 </footer>
