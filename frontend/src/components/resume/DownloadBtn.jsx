@@ -11,15 +11,15 @@ function DownloadBtn({ docRef, user, setUser }) {
 
     const handleDownload = async () => {
         try {
-            
-                const coinResponse = await useCoins({ coins: 10, action: "download-pdf" })
 
-                await handlePdf()
-                setUser((prev) => ({
-                    ...prev, interviewCoin: coinResponse?.interviewCoin,
-                }))
-            
-          
+            const coinResponse = await useCoins({ coins: 10, action: "download-pdf" })
+
+            await handlePdf()
+            setUser((prev) => ({
+                ...prev, interviewCoin: coinResponse?.interviewCoin,
+            }))
+
+
 
         } catch (error) {
             if (error.response?.status === 403) {
