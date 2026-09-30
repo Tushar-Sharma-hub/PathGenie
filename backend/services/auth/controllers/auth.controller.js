@@ -49,7 +49,7 @@ export const GoogleAuth = async (req,res) => {
     }
 }
 
-export const logOut = async()=>{
+export const logOut = async(req, res)=>{
     try{
         const sessionId = req.cookies?.session
 

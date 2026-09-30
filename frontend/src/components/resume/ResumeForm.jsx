@@ -51,17 +51,17 @@ function ResumeForm({step , data , setData}) {
   if(step === 1){
     return(
         <div className='flex flex-col gap-3'>
-            <Input label="Full Name" placeholder="Rahul Sharma" onChange={(v)=>setData({...data , name:v})} value={data.name}/>
+            <Input label="Full Name" placeholder="Tushar Sharma" onChange={(v)=>setData({...data , name:v})} value={data.name}/>
 
-            <Input label="Email" placeholder="rahul@email.com" onChange={(v) => setData({ ...data, email: v })} value={data.email}/>
+            <Input label="Email" placeholder="tushar@email.com" onChange={(v) => setData({ ...data, email: v })} value={data.email}/>
 
             <Input label="Phone"  placeholder="+91 9876543210"  onChange={(v) => setData({ ...data, phone: v })} value={data.phone}   />
 
-            <Input label="Location" placeholder="Jhansi, UP" onChange={(v) => setData({ ...data, location: v })} value={data.location} />
+            <Input label="Location" placeholder="Kathua, J&K" onChange={(v) => setData({ ...data, location: v })} value={data.location} />
 
-            <Input label="LinkedIn URL" placeholder="linkedin.com/in/rahul" onChange={(v) => setData({ ...data, linkedin: v })} value={data.linkedin} />
+            <Input label="LinkedIn URL" placeholder="linkedin.com/in/tushar" onChange={(v) => setData({ ...data, linkedin: v })} value={data.linkedin} />
 
-            <Input label="GitHub URL" placeholder="github.com/rahul" value={data.github}  onChange={(v) => setData({ ...data, github: v })}/>
+            <Input label="GitHub URL" placeholder="github.com/tushar" value={data.github}  onChange={(v) => setData({ ...data, github: v })}/>
 
         </div>
     )

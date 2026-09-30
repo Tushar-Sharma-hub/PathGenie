@@ -39,7 +39,7 @@ function App() {
 
     const getResumeData = async()=>{
       const result = await getResume()
-      dispatch(setResume(result?.data))
+      dispatch(setResume(result?.data)) //set resume data using redux for state management.
     }
 
     getResumeData()
