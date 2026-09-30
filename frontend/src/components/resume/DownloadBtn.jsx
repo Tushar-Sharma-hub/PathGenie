@@ -12,7 +12,7 @@ function DownloadBtn({ docRef, user, setUser }) {
     const handleDownload = async () => {
         try {
 
-            const coinResponse = await useCoins({ coins: 10, action: "download-pdf" })
+            const coinResponse = await useCoins({ coins: 10, action: "resume-builder" })
 
             await handlePdf()
             setUser((prev) => ({
