@@ -1,5 +1,4 @@
-import { json } from "express";
-import redis from "../../../shared/redis/redis.js";
+
 import graph from "../graph/graph.js";
 import Interview from "../models/interview.model.js";
 
@@ -52,8 +51,6 @@ export const startInterview = async (req, res) => {
 
             status: "in-progress",
         })
-
-        await redis.del(`interviews:${userId}`)
 
         return res.status(200).json({
             success: true,
@@ -172,8 +169,6 @@ export const submitAnswer = async (req, res) => {
 
             await interview.save()
 
-            await redis.del(`interviews:${userId}`)
-
             return res.status(200).json({
 
                 success: true,
@@ -190,8 +185,6 @@ export const submitAnswer = async (req, res) => {
 
 
         await interview.save()
-
-        await redis.del(`interviews:${userId}`)
 
         return res.status(200).json({
 
@@ -222,5 +215,38 @@ export const submitAnswer = async (req, res) => {
 
         });
 
+    }
+}
+
+export const getInterview = async (req, res) => {
+    try {
+        const userId = req.headers["x-user-id"]
+        const { id } = req.params
+
+        const interview = await Interview.findOne({
+            _id: id,
+            userId
+        })
+        if (!interview) {
+            return res.status(404).json({
+                success: false,
+                message: "Interview not found",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            interview,
+        });
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+
+            success: false,
+
+            message: error.message,
+
+        });
     }
 }
