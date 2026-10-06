@@ -19,6 +19,6 @@ app.get("/", (req, res) => {
 app.use("/",authRouter)
 
 app.listen(PORT, () => {
-  console.log(`Auth Servce started on port ${PORT}`);
+  console.log(`Auth Service started on port ${PORT}`);
   connectDB();
 });
