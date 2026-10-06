@@ -6,7 +6,7 @@ export const startInterview = async (data) => {
         const response = await api.post("/api/interview/start" , data)
         return response.data
     } catch (error) {
-        console.log(error)
+        console.log("Can't start interview due to error:", error)
         return null
     }
 }

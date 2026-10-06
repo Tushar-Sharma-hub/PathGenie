@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import interviewRouter from "./routes/interview.routes.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
   res.send("Hello from Interview Service!");
 });
 
+app.use("/", interviewRouter)
 
 app.listen(PORT, () => {
   console.log(`Interview Service started on port ${PORT}`);
