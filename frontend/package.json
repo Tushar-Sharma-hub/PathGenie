@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "trap 'docker compose -f ../backend/docker-compose.yml down' EXIT; concurrently -k -n frontend,gateway,auth,resume,interview \"vite\" \"npm --prefix ../backend/gateway run dev\" \"npm --prefix ../backend/services/auth run dev\" \"npm --prefix ../backend/services/resume run dev\" \"npm --prefix ../backend/services/interview run dev\"",
+    "predev": "docker compose -f ../backend/docker-compose.yml up -d redis",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -31,6 +32,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
+    "concurrently": "^10.0.5",
     "eslint": "^10.6.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
