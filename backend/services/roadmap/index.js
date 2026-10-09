@@ -1,0 +1,20 @@
+import express from "express";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+
+dotenv.config();
+
+const app = express();
+
+app.use(express.json())
+
+const PORT = process.env.PORT || 6004;
+
+app.get("/", (req, res) => {
+  res.send("Hello from Roadmap Service!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Roadmap Service started on port ${PORT}`);
+  connectDB();
+});
