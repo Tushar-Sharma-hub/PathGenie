@@ -36,19 +36,19 @@ const roadmapAgent = async (state) => {
             .replace(/```/g, "")
             .trim())
 
-        const capitalize = (value = "") =>
+        const capitalize = (value = "") => //capitalize first letter of string and make rest of the string lowercase
             value.charAt(0).toUpperCase() +
             value.slice(1).toLowerCase();
 
-        roadmap.level = capitalize(roadmap.level);
+        roadmap.level = capitalize(roadmap.level); //use capitalize function to capitalize first letter of level and make rest of the string lowercase so we can match it with the enum values in the roadmap.state.js file
 
         roadmap.modules = (roadmap.modules || []).map((module) => ({
             ...module,
             difficulty: capitalize(module.difficulty),
         }));
-
+ 
         return {
-            ...state,
+            ...state, //keep the existing state properties, and add the roadmap property to the state object
             roadmap
         }
 
