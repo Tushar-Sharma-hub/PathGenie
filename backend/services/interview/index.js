@@ -11,10 +11,6 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 6003;
 
-app.get("/", (req, res) => {
-  res.send("Hello from Interview Service!");
-});
-
 app.use("/", interviewRouter)
 
 app.listen(PORT, () => {

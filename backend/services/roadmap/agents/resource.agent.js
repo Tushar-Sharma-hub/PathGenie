@@ -1,6 +1,6 @@
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
-import llm from "../configs/llm.js";
-import searchVideo from "../configs/youtube.js";
+import llm from "../config/llm.js";
+import searchVideo from "../config/youtube.js";
 
 // Resource agent to fetch documentation and videos for each module
 const resourceAgent = async (state) => {

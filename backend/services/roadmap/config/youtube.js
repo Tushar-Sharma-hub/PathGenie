@@ -8,7 +8,7 @@ const BASE_URL = "https://www.googleapis.com/youtube/v3/search"
 
 const searchVideo = async (topic) => {
     try {
-        query = `${topic} tutorial`;
+        let query = `${topic} tutorial`;
         let { data } = await axios.get(BASE_URL, {
             //parameters for the youtube api request
             params: {

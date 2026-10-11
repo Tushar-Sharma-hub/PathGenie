@@ -1,6 +1,6 @@
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
-import llm from "../configs/llm.js";
-import roadmapPrompt from "../configs/roadmap.prompt.js";
+import llm from "../config/llm.js";
+import roadmapPrompt from "../config/roadmap.prompt.js";
 
 
 const roadmapAgent = async (state) => {
