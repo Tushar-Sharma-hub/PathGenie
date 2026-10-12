@@ -50,9 +50,17 @@ const navigate = useNavigate()
      rec.lang = "en-US";
     rec.continuous = true;
     rec.interimResults = false;
-    rec.onresult = (e)=>{
-      const t = e.results[e.results.length - 1][0].transcript;
-      setAnswer((prev)=>prev + " "+ t)
+    rec.onresult = (event)=>{
+      const transcripts = [];
+      for(let index = event.resultIndex; index < event.results.length; index += 1) {
+        if(event.results[index].isFinal) {
+          transcripts.push(event.results[index][0].transcript.trim());
+        }
+      }
+      const transcript = transcripts.filter(Boolean).join(" ");
+      if(transcript) {
+        setAnswer((previous) => `${previous}${previous.trim() ? " " : ""}${transcript}`);
+      }
     }
     recognitionRef.current = rec
   },[])
