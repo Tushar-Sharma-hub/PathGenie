@@ -414,3 +414,4 @@ This README is designed to match the expectations of the Hacktober Fest Open Sou
 - Krish Potanwar
 - Raj Yadav
 - Mohisha Punwatkar
+- Prabhkirat Singh Marwah
