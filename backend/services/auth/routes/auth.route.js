@@ -9,6 +9,6 @@ authRouter.get("/logout",logOut)
 
 authRouter.post("/use-coins",useCoins)
 
-authRouter.get("/add-coins",addCoins)
+authRouter.post("/add-coins",addCoins)
 
 export default authRouter
