@@ -12,6 +12,10 @@ app.use(cookieParser())
 
 const PORT = process.env.PORT || 6001;
 
+app.get("/", (req, res) => {
+  res.send("Hello from Auth-service");
+});
+
 app.use("/",authRouter)
 
 app.listen(PORT, () => {

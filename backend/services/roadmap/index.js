@@ -11,6 +11,10 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 6004;
 
+app.get("/", (req, res) => {
+  res.send("Hello from Roadmap-service");
+});
+
 app.use("/", roadmapRouter);
 
 app.listen(PORT, () => {
