@@ -4,7 +4,7 @@ import User from "../models/user.model.js"
 import crypto from "crypto"
 import redis from "../../../shared/redis/redis.js"
 
-export const GoogleAuth = async (req, res) => {
+export const login = async (req, res) => {
     try {
         const { token } = req.body
 

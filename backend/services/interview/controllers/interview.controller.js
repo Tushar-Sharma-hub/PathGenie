@@ -1,4 +1,4 @@
-
+import { json } from "express";
 import redis from "../../../shared/redis/redis.js";
 import graph from "../graph/graph.js";
 import Interview from "../models/interview.model.js";
@@ -53,7 +53,7 @@ export const startInterview = async (req, res) => {
             status: "in-progress",
         })
 
-        await redis.del(`interviews:${userId}`) //delete cache for interviews, so that new interview is included in the list of interviews when user fetches all interviews. 
+        await redis.del(`interviews:${userId}`)
 
         return res.status(200).json({
             success: true,
@@ -172,7 +172,7 @@ export const submitAnswer = async (req, res) => {
 
             await interview.save()
 
-            await redis.del(`interviews:${userId}`) //delete cache for interviews, so that new interview is included in the list of interviews when user fetches all interviews.
+            await redis.del(`interviews:${userId}`)
 
             return res.status(200).json({
 
@@ -190,7 +190,8 @@ export const submitAnswer = async (req, res) => {
 
 
         await interview.save()
-        await redis.del(`interviews:${userId}`) //delete cache for interviews, so that new interview is included in the list of interviews when user fetches all interviews.
+
+        await redis.del(`interviews:${userId}`)
 
         return res.status(200).json({
 
@@ -223,6 +224,7 @@ export const submitAnswer = async (req, res) => {
 
     }
 }
+
 
 export const getInterview = async (req, res) => {
     try {
@@ -257,6 +259,7 @@ export const getInterview = async (req, res) => {
     }
 }
 
+
 export const getAllInterviews = async (req, res) => {
     try {
         const userId = req.headers["x-user-id"]
@@ -270,13 +273,14 @@ export const getAllInterviews = async (req, res) => {
 
         const interviews = await Interview.find({ userId }).sort({ createdAt: -1 })
 
-        const completed = interviews.filter((item) => item.status === "completed") //filter completed interviews
+        const completed = interviews.filter((item) => item.status === "completed")
 
-        const totalQuestions = interviews.reduce((sum, item) => sum + item.questions.length, 0) //get total questions from all interviews
+        const totalQuestions = interviews.reduce((sum, item) => sum + item.questions.length, 0)
 
-        const averageScore = completed.length > 0 ? Number((completed.reduce((sum, item) => sum + item.overallScore, 0)) / completed.length).toFixed(1) : 0 //get average score from completed interviews
+        const averageScore = completed.length > 0 ? Number(
+            (completed.reduce((sum, item) => sum + item.overallScore, 0)) / completed.length).toFixed(1) : 0
 
-        //store in stats object
+
         const stats = {
             totalInterviews: interviews.length,
             totalQuestions,
@@ -284,9 +288,8 @@ export const getAllInterviews = async (req, res) => {
             averageScore
         }
 
-        //function to get average data for interview's questions based on feedback
+
         const getAverageData = (list) => {
-            //list is array of interviews.
             if (!list.length) {
                 return [
                     { skill: "Correctness", score: 0 },
@@ -311,7 +314,6 @@ export const getAllInterviews = async (req, res) => {
                 creativity: 0,
             }
 
-            //get total score for each skill from all questions in the list of interviews using forEach loop.
             list.forEach((interview) => {
                 interview.questions.forEach((q) => {
                     total.correctness += q.feedback.correctness || 0;
@@ -325,7 +327,7 @@ export const getAllInterviews = async (req, res) => {
 
                 })
             })
-            //get total number of questions in the list of interviews using reduce method.
+
             const count = list.reduce((sum, item) => sum + item.questions.length, 0)
 
             if (count === 0) {
@@ -341,7 +343,7 @@ export const getAllInterviews = async (req, res) => {
                 ];
             }
 
-            //return average score for each skill by dividing total score by count and rounding to nearest integer.
+
             return [
                 {
                     skill: "Correctness",
@@ -386,36 +388,35 @@ export const getAllInterviews = async (req, res) => {
             ]
         }
 
-        //filter completed interviews based on type using getAverageData function to get average data for technical and hr interviews.
-        const technicalInterviews = completed.filter((item) => item.type === "technical")
+            const technicalInterviews = completed.filter((item) => item.type === "technical")
 
-        const HrInterviews = completed.filter((item) => item.type === "hr")
-
-
-        const technicalData = getAverageData(technicalInterviews)
-
-        const hrData = getAverageData(HrInterviews)
-
-        const technicalCount = technicalInterviews.length
-
-        const hrCount = HrInterviews.length
-
-        const payload = {
-            success: true,
-            interviews,
-            stats,
-            technicalData,
-            hrData,
-            technicalCount,
-            hrCount,
-        }
-
-        await redis.set(`interviews:${userId}`, JSON.stringify(payload), "EX", 600)
+            const HrInterviews = completed.filter((item) => item.type === "hr")
 
 
-        return res.status(200).json(payload);
+            const technicalData = getAverageData(technicalInterviews)
+
+            const hrData = getAverageData(HrInterviews)
+
+            const technicalCount = technicalInterviews.length
+
+            const hrCount = HrInterviews.length
+
+            const payload = {
+                success: true,
+                interviews,
+                stats,
+                technicalData,
+                hrData,
+                technicalCount,
+                hrCount,
+            }
+
+            await redis.set(`interviews:${userId}`, JSON.stringify(payload), "EX", 600)
 
 
+            return res.status(200).json(payload);
+
+        
 
 
     } catch (error) {
@@ -429,3 +430,5 @@ export const getAllInterviews = async (req, res) => {
         });
     }
 }
+
+

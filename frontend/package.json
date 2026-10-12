@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "trap 'docker compose -f ../backend/docker-compose.yml down' EXIT; concurrently -k -n frontend,gateway,auth,resume,interview,roadmap,billing \"vite\" \"npm --prefix ../backend/gateway run dev\" \"npm --prefix ../backend/services/auth run dev\" \"npm --prefix ../backend/services/resume run dev\" \"npm --prefix ../backend/services/interview run dev\" \"npm --prefix ../backend/services/roadmap run dev\" \"npm --prefix ../backend/services/billing run dev\"",
-    "predev": "docker compose -f ../backend/docker-compose.yml up -d redis",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

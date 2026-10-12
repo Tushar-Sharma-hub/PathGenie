@@ -160,6 +160,6 @@ const interviewSchema = new mongoose.Schema(
     }
 );
 
-const Interview = mongoose.model("Interview", interviewSchema)
+const Interview = mongoose.model("Interview" , interviewSchema)
 
 export default Interview

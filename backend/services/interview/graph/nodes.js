@@ -6,17 +6,17 @@ import { summaryAgent } from "../agents/summary.agent.js";
 
 export async function interviewNode(state) {
     const questions = await interviewAgent({
-        role: state.role,
-        type: state.type,
-        useResume: state.useResume,
-        resume: state.resume
+        role:state.role,
+        type:state.type,
+        useResume:state.useResume,
+        resume:state.resume
 
     })
 
     return {
         questions
     }
-
+    
 }
 
 export async function feedbackNode(state) {
@@ -37,7 +37,7 @@ export async function feedbackNode(state) {
 
 export async function summaryNode(state) {
     const report = await summaryAgent({
-        role: state.role,
+         role: state.role,
 
         type: state.type,
 
