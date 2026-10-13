@@ -1,8 +1,6 @@
-import React from 'react'
 import { Routes , Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
-import { use } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { getCurrentUser } from './apis/user.api'
@@ -16,6 +14,7 @@ import InterviewPage from './pages/InterviewPage'
 import InterviewReport from './pages/InterviewReport'
 import Roadmap from './pages/Roadmap'
 import Billing from './pages/Billing'
+import CompanyInterview from './pages/CompanyInterview'
 
 function App() {
   const [user,setUser]= useState(null)
@@ -44,7 +43,7 @@ function App() {
 
     getResumeData()
 
-  },[])
+  },[dispatch])
 
 
   if(loading){
@@ -89,6 +88,10 @@ function App() {
 
       <Route path='/roadmap' element={
       user ? <Roadmap user={user} setUser={setUser}/> 
+      : <Navigate to="/" replace/> }/>
+
+      <Route path='/company-interview' element={
+      user ? <CompanyInterview setUser={setUser}/>
       : <Navigate to="/" replace/> }/>
 
       <Route path='/billing' element={

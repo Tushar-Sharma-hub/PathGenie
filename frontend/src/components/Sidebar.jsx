@@ -1,7 +1,6 @@
-import React from 'react'
 import { AnimatePresence, motion } from "motion/react"
 import { GiArtificialHive, GiTwoCoins } from 'react-icons/gi'
-import { FiFileText, FiLogOut, FiMap, FiPlus, FiSidebar, FiStar } from 'react-icons/fi'
+import { FiBriefcase, FiFileText, FiLogOut, FiMap, FiPlus, FiSidebar, FiStar } from 'react-icons/fi'
 import { useNavigate } from "react-router-dom"
 import { FaCirclePlus } from "react-icons/fa6";
 
@@ -20,6 +19,11 @@ const NAV_ITEMS = [
         icon: <FiMap size={15} />,
         label: "Roadmap Builder",
         path: "/roadmap",
+    },
+    {
+        icon: <FiBriefcase size={15} />,
+        label: "Company Interview",
+        path: "/company-interview",
     },
 
 

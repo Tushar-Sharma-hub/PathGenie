@@ -132,26 +132,30 @@ flowchart TD
     C --> E[Resume Service]
     C --> F[Interview Service]
     C --> G[Roadmap Service]
-    C --> H[Billing Service]
+    C --> H[Company Interview Service]
+    C --> I[Billing Service]
 
-    E --> I[Resume Parser / PDF Extraction]
-    E --> J[AI Resume Agent]
-    E --> K[(MongoDB)]
-    E --> L[(Redis)]
+    E --> J[Resume Parser / PDF Extraction]
+    E --> K[AI Resume Agent]
+    E --> L[(MongoDB)]
+    E --> M[(Redis)]
 
-    F --> M[LangGraph Interview Workflow]
-    M --> N[Interview Agent]
-    M --> O[Feedback Agent]
-    M --> P[Summary Agent]
-    F --> K
+    F --> N[LangGraph Interview Workflow]
+    N --> O[Interview Agent]
+    N --> P[Feedback Agent]
+    N --> Q[Summary Agent]
     F --> L
+    F --> M
 
-    G --> Q[Roadmap Agent]
-    G --> K
+    H --> S[Company Interview Agents]
+    H --> L
+
+    G --> R[Roadmap Agent]
     G --> L
+    G --> M
 
-    B --> R[(Firebase Auth)]
-    B --> K
+    B --> T[(Firebase Auth)]
+    B --> L
 ```
 
 ## 11. Component-Level Architecture
@@ -188,6 +192,14 @@ flowchart TD
 - Stores answers and progress
 - Evaluates each response
 - Produces final summary, strengths, weaknesses, and recommendations
+
+### Company Interview Service
+
+- Provides a separate company-specific practice flow for technical and HR interviews
+- Generates original role-aware questions inspired by broad, publicly known hiring themes; it does not claim to reproduce actual or confidential company questions
+- Evaluates each answer, stores an example strong answer for review, and provides a final scorecard and recommendations per authenticated user
+- Caches user-scoped history and interview details in Redis for 10 minutes, invalidating those entries when a session changes
+- Runs on port `6007` by default; configure `COMPANY_INTERVIEW_SERVICE_URL` in the gateway environment and `MONGODB_URI`, `REDIS_URL`, and `GROQ_API_KEY` in the service environment
 
 ### Roadmap Service
 
@@ -266,6 +278,7 @@ The project follows a multi-agent workflow pattern where each AI agent is respon
 - AI-powered resume evaluation and skill gap detection
 - HR interview simulation
 - Technical interview simulation
+- Company-specific interview practice with answer feedback and a final scorecard
 - Answer-by-answer feedback and scoring
 - Interview status tracking and analytics
 - Personalized job roadmap generation
