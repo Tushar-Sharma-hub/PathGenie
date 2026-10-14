@@ -29,7 +29,6 @@ app.use("/api/auth", proxy(process.env.AUTH_SERVICE_URL));
 app.use("/api/resume",isAuth ,proxyWithHeaders(process.env.RESUME_SERVICE_URL));
 app.use("/api/interview",isAuth ,proxyWithHeaders(process.env.INTERVIEW_SERVICE_URL));
 app.use("/api/roadmap",isAuth ,proxyWithHeaders(process.env.ROADMAP_SERVICE_URL));
-app.use("/api/company-interview",isAuth ,proxyWithHeaders(process.env.COMPANY_INTERVIEW_SERVICE_URL));
 app.use("/api/billing",isAuth ,proxyWithHeaders(process.env.BILLING_SERVICE_URL));
 
 app.get("/api/me",isAuth , getCurrentUser) //first will authorize and put user data in req.user then we can use it in getCurrentUser fxn in controller to fetch data easily.

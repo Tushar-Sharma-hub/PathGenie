@@ -20,7 +20,7 @@ Most existing tools are either generic, expensive, or not tailored to Indian fre
 
 ## 3. Project Overview
 
-PathGenie is an AI-powered platform designed to help freshers prepare for jobs through ATS-friendly resume creation, resume analysis, role-based mock interviews, company-specific practice, and personalized learning roadmaps. Users can create and download a tailored resume, practice technical or HR interviews for a selected company, review example answers and feedback, and follow a role-specific learning path.
+PathGenie is an AI-powered platform designed to help freshers prepare for jobs through ATS-friendly resume creation, resume analysis, role-based mock interviews, and personalized learning roadmaps. Users can create and download a tailored resume, practice technical or HR interviews, receive feedback, and follow a role-specific learning path.
 
 The project focuses on creating a practical AI-assisted ecosystem for job preparation rather than a static chatbot. It combines multiple AI-driven services to analyze resume quality, simulate interviews, evaluate responses, and recommend a clear path toward role-specific improvement.
 
@@ -32,9 +32,7 @@ PathGenie introduces an AI-powered preparation stack that helps users:
 - Upload and analyze resumes using AI-based extraction and evaluation
 - Choose interview types such as HR and technical interviews
 - Practice interviews with dynamic AI-generated questions
-- Practice company-specific technical or HR interviews with optional resume personalization
 - Receive evaluation, feedback, and summary reports after every answer
-- Review company interview history, including submitted answers, example strong answers, and feedback
 - Track performance through dashboards and interview history
 - Generate personalized learning roadmaps based on role and target package
 
@@ -50,7 +48,6 @@ The project aims to achieve the following goals:
 4. Generate a role-specific learning roadmap aligned with salary goals.
 5. Reduce the gap between self-preparation and recruiter expectations.
 6. Build a scalable AI-assisted career platform that can be extended to broader recruitment and upskilling use cases.
-7. Help candidates rehearse original questions tailored to a target company and role without presenting them as actual or confidential company questions.
 
 ## 6. Target Users / Use Case
 
@@ -67,7 +64,6 @@ The project aims to achieve the following goals:
 - A student uploads a resume and wants AI to identify missing skills and weak sections.
 - A user wants a roadmap to reach a target package such as 20 LPA or 30 LPA.
 - A candidate wants detailed feedback after answering interview questions.
-- A candidate wants to practice a technical or HR interview for a chosen company and later review their answers against example strong answers.
 
 ## 7. Open-Source AI Technology Selected
 
@@ -119,7 +115,7 @@ AI is not a decorative feature in this project; it acts as the decision engine a
 AI responsibilities include:
 
 - Parsing resume content and identifying strengths, missing skills, and ATS gaps
-- Generating well-structured role-specific and company-inspired interview questions
+- Generating well-structured role-specific interview questions
 - Evaluating candidate responses against expected quality, clarity, and technical depth
 - Producing performance summaries and improvement suggestions
 - Personalizing a career roadmap based on role, package target, and resume data
@@ -136,8 +132,7 @@ flowchart TD
     C --> E[Resume Service]
     C --> F[Interview Service]
     C --> G[Roadmap Service]
-    C --> H[Company Interview Service]
-    C --> I[Billing Service]
+    C --> H[Billing Service]
 
     E --> J[Resume Parser / PDF Extraction]
     E --> K[AI Resume Agent]
@@ -150,10 +145,6 @@ flowchart TD
     N --> Q[Summary Agent]
     F --> L
     F --> M
-
-    H --> S[Company Interview Agents]
-    H --> L
-    H --> M
 
     G --> R[Roadmap Agent]
     G --> L
@@ -198,29 +189,6 @@ flowchart TD
 - Evaluates each response
 - Produces final summary, strengths, weaknesses, and recommendations
 
-### Company Interview Service
-
-- Provides a separate company-specific practice flow for technical and HR interviews
-- Generates five original, progressively challenging questions for a selected company and role, optionally using resume context. Questions are inspired by broad, publicly known hiring themes and are not represented as actual or confidential company questions.
-- Evaluates answers, provides per-answer feedback, and generates an overall scorecard with strengths, weaknesses, and actionable recommendations when all questions are answered
-- Stores a reference/example strong answer with each generated question. Interview history lets users review the question, their submitted answer, example answer, and feedback. Example answers are not disclosed for unanswered questions in active sessions.
-- Caches user-scoped history and interview details in Redis for 10 minutes, invalidating those entries when a session changes
-- Runs on port `6007` by default. Configure `COMPANY_INTERVIEW_SERVICE_URL` in the gateway environment and `MONGODB_URI`, `REDIS_URL`, and `GROQ_API_KEY` in the service environment. A template is available at [`backend/services/company-interview/.env.example`](./backend/services/company-interview/.env.example).
-- The frontend deducts 50 interview coins when starting a session
-
-#### Company Interview API
-
-The authenticated gateway exposes these endpoints under `/api/company-interview`:
-
-| Method | Endpoint | Purpose |
-|---|---|---|
-| `POST` | `/start` | Generate and save a five-question company interview |
-| `POST` | `/answer` | Evaluate the current answer, advance the session, and produce the final report when complete |
-| `GET` | `/all` | List the signed-in user's recent company interviews |
-| `GET` | `/:id` | Load one of the signed-in user's interview records, including answer review data |
-
-All records are scoped to the authenticated user. The history list is limited to the most recent 50 sessions.
-
 ### Roadmap Service
 
 - Accepts role and package target
@@ -243,7 +211,7 @@ sequenceDiagram
     participant Mongo as MongoDB
     participant Redis
 
-    User->>App: Request resume, interview, company practice, or roadmap
+    User->>App: Request resume creation or analysis, interview, or roadmap
     App->>Gateway: Send request
     Gateway->>Services: Route request to the right service
     Services->>Redis: Check or update cached data
@@ -276,15 +244,6 @@ The project follows a multi-agent workflow pattern where each AI agent is respon
 3. AI generates a plan covering learning priorities, milestones, and next steps.
 4. The system stores the roadmap and shows it in a structured format.
 
-### Company Interview Workflow
-
-1. The candidate chooses a company, role, interview type (technical or HR), and whether to use their saved resume.
-2. The company interview service generates five original questions and example strong answers using broad public hiring themes and the candidate's selected context.
-3. The candidate answers each question; the service evaluates the answer against the question and example answer and returns scores, feedback, and improvements.
-4. After the final answer, the service creates an overall scorecard with a summary, strengths, weaknesses, and recommendations.
-5. MongoDB stores the session and answers. Redis caches the user's recent history and interview details for 10 minutes; writes invalidate affected cache entries.
-6. The candidate can open interview history to review companies, roles, scores, questions, submitted answers, example answers, and feedback.
-
 ## 14. Technology Stack
 
 | Layer | Technology |
@@ -307,8 +266,6 @@ The project follows a multi-agent workflow pattern where each AI agent is respon
 - AI-powered resume evaluation and skill gap detection
 - HR interview simulation
 - Technical interview simulation
-- Company-specific interview practice with answer feedback and a final scorecard
-- Company interview history with submitted answers, example strong answers, and feedback
 - Answer-by-answer feedback and scoring
 - Interview status tracking and analytics
 - Personalized job roadmap generation
@@ -343,13 +300,7 @@ The project will be implemented in a modular microservice style to keep the syst
 - Combine user role and resume data to generate action plans
 - Format roadmap results into readable learning sequences
 
-### Phase 5: Company Interview Simulator
-
-- Generate original company- and role-aware interview questions with example answers
-- Evaluate candidate answers and create a final scorecard
-- Store interview history and cache history/detail reads in Redis
-
-### Phase 6: Dashboard and Analytics
+### Phase 5: Dashboard and Analytics
 
 - Display metrics such as interview totals, scores, and completion trends
 - Create overview screens that help users track improvement over time
@@ -362,7 +313,6 @@ The final implementation is expected to deliver:
 - ATS-friendly resumes generated from user information and downloadable as PDFs
 - AI-driven mock interviews for freshers
 - detailed custom feedback and summary reports
-- company-specific interview practice with answer history and example answers
 - resume analysis and skill suggestions
 - personalized roadmap based on role and target package
 - a polished dashboard to monitor performance and progress
