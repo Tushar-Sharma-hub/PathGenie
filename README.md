@@ -404,13 +404,3 @@ Mitigation:
 ## Summary
 
 PathGenie is a practical AI-driven platform for interview preparation, skill evaluation, and career roadmap generation. It addresses a real problem faced by freshers: the lack of structured, personalized, and affordable preparation tools. By using open-source AI technologies and a modular architecture, the platform demonstrates meaningful integration of AI in a way that is both useful and scalable for future growth.
-
-This README is designed to match the expectations of the Hacktober Fest Open Source AI Hackathon qualifier by clearly documenting the problem, solution, architecture, AI strategy, and implementation plan.
-
-## Team Members
-
-- Tushar Sharma
-- Krish Potanwar
-- Raj Yadav
-- Mohisha Punwatkar
-- Prabhkirat Singh Marwah
