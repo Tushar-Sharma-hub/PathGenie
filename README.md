@@ -20,34 +20,32 @@ Most existing tools are either generic, expensive, or not tailored to Indian fre
 
 ## 3. Project Overview
 
-PathGenie is an AI-powered platform designed to help freshers prepare for jobs through ATS-friendly resume creation, resume analysis, role-based mock interviews, and personalized learning roadmaps. Users can create and download a tailored resume, practice technical or HR interviews, receive feedback, and follow a role-specific learning path.
+PathGenie is an AI-powered platform that helps freshers prepare for jobs through resume creation and analysis, role-based mock interviews, and personalized learning roadmaps. Users can create and download a tailored resume, practice technical or HR interviews, receive feedback, and follow a role-specific learning path.
 
-The project focuses on creating a practical AI-assisted ecosystem for job preparation rather than a static chatbot. It combines multiple AI-driven services to analyze resume quality, simulate interviews, evaluate responses, and recommend a clear path toward role-specific improvement.
+The platform combines AI-driven services to analyze resumes, simulate interviews, evaluate responses, and recommend a path toward role-specific improvement.
 
-## 4. Proposed Solution
+## 4. Implemented Platform
 
-PathGenie introduces an AI-powered preparation stack that helps users:
+PathGenie is an implemented AI-powered career-preparation platform. Users can:
 
-- Provide their information to create an ATS-friendly resume and download it as a PDF
-- Upload and analyze resumes using AI-based extraction and evaluation
-- Choose interview types such as HR and technical interviews
-- Practice interviews with dynamic AI-generated questions
-- Receive evaluation, feedback, and summary reports after every answer
-- Track performance through dashboards and interview history
-- Generate personalized learning roadmaps based on role and target package
+- Build and preview a resume, then download it as a PDF
+- Upload a resume PDF for text extraction and AI-powered analysis
+- Start role-based HR or technical mock interviews with generated questions
+- Submit answers and receive feedback as the interview progresses
+- Review completed interviews, including scores, strengths, weaknesses, and recommendations
+- Generate and revisit learning roadmaps based on a target role, package, and optional resume context
 
-Instead of a single generic assistant, the platform uses specialized AI agents to handle different stages of the journey: resume analysis, interview question generation, feedback generation, and roadmap planning.
+The backend uses dedicated AI workflows for resume analysis, interview questions and feedback, interview summaries, and roadmap generation.
 
-## 5. Objectives
+## 5. Product Outcomes
 
-The project aims to achieve the following goals:
+The implemented product supports the following user journeys:
 
-1. Help freshers practice realistic interviews for common job roles.
-2. Provide actionable feedback instead of generic answers.
-3. Convert resume data into structured skill and gap analysis.
-4. Generate a role-specific learning roadmap aligned with salary goals.
-5. Reduce the gap between self-preparation and recruiter expectations.
-6. Build a scalable AI-assisted career platform that can be extended to broader recruitment and upskilling use cases.
+1. Practice HR and technical interviews tailored to a selected role.
+2. Receive answer-level feedback and a final interview report.
+3. Analyze an uploaded resume and review structured recommendations.
+4. Create a learning roadmap aligned with a target role and package.
+5. Access saved resumes, interview history, and roadmaps through an authenticated account.
 
 ## 6. Target Users / Use Case
 
@@ -65,24 +63,24 @@ The project aims to achieve the following goals:
 - A user wants a roadmap to reach a target package such as 20 LPA or 30 LPA.
 - A candidate wants detailed feedback after answering interview questions.
 
-## 7. Open-Source AI Technology Selected
+## 7. AI and Data Technologies
 
-The project uses the following open-source AI ecosystem and supporting technologies:
+The implemented AI workflows and supporting services use:
 
-- openai/gpt-oss-120b (open-weight reasoning model used for interview coaching, evaluation, and roadmap generation)
+- `openai/gpt-oss-120b`, accessed through the Groq API
 - LangChain for prompting and LLM orchestration
 - LangGraph for multi-step agent workflows and graph-based execution
-- Redis for fast caching and session optimization
-- MongoDB for storing interview records, resumes, and learning progress
+- Redis for session and response caching
+- MongoDB for user, resume, interview, roadmap, and billing records
 - Firebase Authentication for login and user state management
 
-This combination allows the project to build a real AI agent-based interview system with meaningful orchestration, not just a basic API wrapper.
+These components are integrated into the running application and its backend services.
 
 ## 8. Why This Technology Was Selected
 
-### openai/gpt-oss-120b
+### `openai/gpt-oss-120b` through Groq
 
-This model was selected because it is strong at reasoning, instruction following, and structured output generation, which is critical for:
+The application uses this model for:
 
 - generating role-specific interview questions
 - evaluating answers with feedback
@@ -91,7 +89,7 @@ This model was selected because it is strong at reasoning, instruction following
 
 ### LangChain + LangGraph
 
-These frameworks were chosen to model the application as a workflow-driven system:
+These frameworks coordinate multi-step workflows, including:
 
 - interview initiation
 - answer evaluation
@@ -99,18 +97,14 @@ These frameworks were chosen to model the application as a workflow-driven syste
 - summary generation
 - roadmap generation
 
-This makes the system modular, explainable, and easier to scale with more agents or tools later.
-
 ### Redis and MongoDB
 
-These database and cache layers are necessary for performance and persistence:
-
-- Redis caches recent user data and reduces repeated queries
-- MongoDB stores structured records such as resume metadata, interview history, and roadmap results
+- Redis caches sessions and selected user data to reduce repeated database queries.
+- MongoDB persists structured records such as resume analysis, interview history, and roadmaps.
 
 ## 9. AI's Role in the System
 
-AI is not a decorative feature in this project; it acts as the decision engine across the full user journey.
+AI is integrated into the core product workflows:
 
 AI responsibilities include:
 
@@ -120,7 +114,7 @@ AI responsibilities include:
 - Producing performance summaries and improvement suggestions
 - Personalizing a career roadmap based on role, package target, and resume data
 
-The AI system is designed to behave like a coach rather than a generic chatbot, making it more useful and credible for actual hiring preparation.
+The generated feedback and plans are presented as structured coaching guidance within the application.
 
 ## 10. System Architecture
 
@@ -249,81 +243,54 @@ The project follows a multi-agent workflow pattern where each AI agent is respon
 | Layer | Technology |
 |---|---|
 | Frontend | React, Vite, Tailwind CSS, Redux |
-| Routing & UI | React Router, Framer Motion |
+| Routing and UI | React Router, Framer Motion |
 | Backend API | Node.js, Express |
-| AI Orchestration | LangChain, LangGraph |
-| LLM | openai/gpt-oss-120b |
+| AI orchestration | LangChain, LangGraph |
+| LLM access | Groq API with `openai/gpt-oss-120b` |
 | Database | MongoDB |
-| Caching | Redis |
-| Authentication | Firebase Auth |
-| PDF Parsing | PDF extraction utilities |
-| Payment/Monetization | Razorpay |
-| Containerization Support | Docker |
+| Caching and sessions | Redis |
+| Authentication | Firebase Auth / Firebase Admin |
+| Resume processing | PDF text extraction utilities |
+| Payments | Razorpay |
+| Containerization support | Docker |
 
-## 15. Expected Features
+## 15. Implemented Features
 
-- Resume upload and PDF parsing
-- AI-powered resume evaluation and skill gap detection
-- HR interview simulation
-- Technical interview simulation
-- Answer-by-answer feedback and scoring
-- Interview status tracking and analytics
-- Personalized job roadmap generation
-- Role and salary-targeted learning paths
-- Dashboard with interview history and performance insights
-- user authentication and session management
+- Resume builder with preview and PDF download
+- Resume PDF upload, text extraction, AI analysis, and saved recommendations
+- HR and technical mock interview workflows with generated questions
+- Answer submission, per-answer feedback, interview completion, and final reports
+- Interview history and dashboard performance metrics
+- Personalized roadmaps using a target role, package, and optional resume data
+- Authenticated user sessions and user-scoped data
+- Billing and payment workflows using Razorpay
 
-## 16. Implementation Approach
+## 16. Backend API
 
-The project will be implemented in a modular microservice style to keep the system maintainable and extensible.
+The Express API gateway authenticates requests and routes them to the backend services. Implemented product routes include:
 
-### Phase 1: Core Product Setup
+- **Resume:** `POST /api/resume/upload`, `GET /api/resume/get-resume`
+- **Interview:** `POST /api/interview/start`, `POST /api/interview/answer`, `GET /api/interview/all`, `GET /api/interview/:id`
+- **Roadmap:** `POST /api/roadmap/generate`, `GET /api/roadmap/all`, `GET /api/roadmap/:id`
 
-- Initialize frontend, gateway, and service architecture
-- Set up MongoDB, Redis, and Firebase authentication
-- Build user profile and session handling
+The gateway also routes authentication and billing requests to their respective services.
 
-### Phase 2: Resume Intelligence
+## 17. Architecture and Services
 
-- Collect user information to create ATS-friendly resumes with PDF export
-- Add uploaded PDF support, extract text, and pass it to the AI model
-- Save resume metadata and recommendations
+The application is organized as a React frontend and Node.js/Express backend services:
 
-### Phase 3: Interview Engine
+- **API gateway:** Authenticates and routes requests to downstream services.
+- **Auth service:** Handles Firebase-backed authentication and user sessions.
+- **Resume service:** Extracts PDF text, runs resume analysis, and stores results.
+- **Interview service:** Runs question generation, answer feedback, and report workflows.
+- **Roadmap service:** Generates and stores role- and package-oriented learning plans.
+- **Billing service:** Supports payment flows through Razorpay.
 
-- Create prompt templates for technical and HR interviews
-- Implement graph-based interview workflow
-- Add answer evaluation and final report generation
+MongoDB is used for persistent application data, while Redis supports session and data caching.
 
-### Phase 4: Roadmap Builder
+## 18. Future Enhancements
 
-- Combine user role and resume data to generate action plans
-- Format roadmap results into readable learning sequences
-
-### Phase 5: Dashboard and Analytics
-
-- Display metrics such as interview totals, scores, and completion trends
-- Create overview screens that help users track improvement over time
-
-## 17. Expected Final Output
-
-The final implementation is expected to deliver:
-
-- a web application where users can log in and manage career prep sessions
-- ATS-friendly resumes generated from user information and downloadable as PDFs
-- AI-driven mock interviews for freshers
-- detailed custom feedback and summary reports
-- resume analysis and skill suggestions
-- personalized roadmap based on role and target package
-- a polished dashboard to monitor performance and progress
-
-This creates a practical and valuable platform rather than a simple chatbot interface.
-
-## 18. Future Scope / Scalability
-
-The project is designed to scale into a broader job-prep ecosystem.
-
-Possible future additions include:
+Potential additions beyond the current feature set include:
 
 - coding interview simulations with live code execution
 - voice-based interview practice
@@ -333,74 +300,15 @@ Possible future additions include:
 - AI-generated portfolio suggestions and project recommendations
 - recommendation engine for learning resources and internships
 
-By designing the architecture as service-oriented and AI-agent-driven, additional intelligence modules can be added without major restructuring.
+## 19. Engineering Considerations
 
-## 19. Open-Source Dependencies / Components
+The implemented workflows account for several practical constraints:
 
-The project depends on and integrates the following open-source tools and libraries:
-
-- React
-- Vite
-- Node.js
-- Express.js
-- MongoDB
-- Redis
-- LangChain
-- LangGraph
-- openai/gpt-oss-120b (open-weight model)
-- Firebase Admin / Firebase Auth
-- Tailwind CSS
-- Docker
-- Razorpay SDK (for payment workflows)
-
-These components form the base architecture and are all relevant to the final system.
-
-## 20. Expected Challenges and Mitigation
-
-### Challenge 1: LLM Output Variability
-
-AI responses may sometimes be inconsistent or less structured.
-
-Mitigation:
-- Use strict prompt templates
-- Define output schemas clearly
-- Enforce JSON parsing and validation
-- Add fallback logic when responses fail
-
-### Challenge 2: Resume Parsing Quality
-
-PDFs can vary widely in format, structure, and content quality.
-
-Mitigation:
-- Standardize extraction flow
-- Clean extracted text before AI processing
-- Add post-processing for missing or malformed fields
-
-### Challenge 3: Role-Specific Interview Quality
-
-Generic prompts may not reflect real-world recruiter expectations.
-
-Mitigation:
-- Use role-aware prompts and skill-specific evaluation logic
-- Include resume context and target job profile in prompts
-
-### Challenge 4: Scalability and Performance
-
-Large numbers of users can increase processing and caching pressure.
-
-Mitigation:
-- Use Redis for caching repetitive data
-- Keep services modular
-- Add asynchronous processing for heavier AI operations when needed
-
-### Challenge 5: User Trust and Actionability
-
-Users may ignore advice if the feedback is too generic.
-
-Mitigation:
-- Generate structured recommendations grounded in resume data and interview answers
-- Tie suggestions to measurable skill gaps and improvement priorities
+- **Variable AI output:** Prompts and graph-based workflows structure generated questions, feedback, and roadmaps.
+- **Resume format differences:** Uploaded PDFs are processed through a text-extraction step before analysis.
+- **User data access:** Authenticated requests are forwarded through the gateway, and user-specific records are queried by user ID.
+- **Repeated reads:** Redis caches sessions and selected records, with cache invalidation on relevant updates.
 
 ## Summary
 
-PathGenie is a practical AI-driven platform for interview preparation, skill evaluation, and career roadmap generation. It addresses a real problem faced by freshers: the lack of structured, personalized, and affordable preparation tools. By using open-source AI technologies and a modular architecture, the platform demonstrates meaningful integration of AI in a way that is both useful and scalable for future growth.
+PathGenie is an implemented AI-assisted career-preparation platform for resume building and analysis, mock interviews, and personalized learning roadmaps. Its React frontend, authenticated API gateway, and dedicated backend services connect AI workflows with persistent user data and payment capabilities.
