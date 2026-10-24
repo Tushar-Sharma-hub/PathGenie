@@ -2,6 +2,8 @@
 
 From uncertainty to job-ready confidence, driven by AI.
 
+**URL:** [PathGenie](https://dq9ly20ppfwb8.cloudfront.net/)
+
 ## 1. Project Name
 
 PathGenie
@@ -254,7 +256,20 @@ The project follows a multi-agent workflow pattern where each AI agent is respon
 | Payments | Razorpay |
 | Containerization support | Docker |
 
-## 15. Implemented Features
+## 15. Deployment
+
+PathGenie is deployed on AWS using the following services:
+
+| AWS technology | Purpose |
+|---|---|
+| Amazon CloudFront | Delivers the frontend to users |
+| Amazon ECS | Runs the containerized gateway and backend services |
+| Amazon ECR | Stores the Docker images used by ECS |
+| Application Load Balancer | Routes incoming requests to the gateway |
+| Amazon ElastiCache for Redis | Provides the backend cache |
+| Amazon VPC and security groups | Isolate services and control network access |
+
+## 16. Implemented Features
 
 - Resume builder with preview and PDF download
 - Resume PDF upload, text extraction, AI analysis, and saved recommendations
@@ -265,7 +280,7 @@ The project follows a multi-agent workflow pattern where each AI agent is respon
 - Authenticated user sessions and user-scoped data
 - Billing and payment workflows using Razorpay
 
-## 16. Backend API
+## 17. Backend API
 
 The Express API gateway authenticates requests and routes them to the backend services. Implemented product routes include:
 
@@ -275,7 +290,7 @@ The Express API gateway authenticates requests and routes them to the backend se
 
 The gateway also routes authentication and billing requests to their respective services.
 
-## 17. Architecture and Services
+## 18. Architecture and Services
 
 The application is organized as a React frontend and Node.js/Express backend services:
 
@@ -288,7 +303,7 @@ The application is organized as a React frontend and Node.js/Express backend ser
 
 MongoDB is used for persistent application data, while Redis supports session and data caching.
 
-## 18. Future Enhancements
+## 19. Future Enhancements
 
 Potential additions beyond the current feature set include:
 
@@ -300,7 +315,7 @@ Potential additions beyond the current feature set include:
 - AI-generated portfolio suggestions and project recommendations
 - recommendation engine for learning resources and internships
 
-## 19. Engineering Considerations
+## 20. Engineering Considerations
 
 The implemented workflows account for several practical constraints:
 
