@@ -7,13 +7,13 @@ export const isAuth = async (req,res,next)=>{
         const sessionId= req.cookies?.session
 
         if(!sessionId){
-            res.status(401).json({message:"Unauthorized"})
+            return res.status(401).json({message:"Unauthorized"})
         }
 
         const session = await redis.get(`session:${sessionId}`)
 
         if(!session){
-            res.status(401).json({message:"Session expired."})
+            return res.status(401).json({message:"Session expired."})
         }
         req.user = JSON.parse(session);
 
