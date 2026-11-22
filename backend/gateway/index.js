@@ -1,5 +1,5 @@
+import "dotenv/config";
 import express from "express";
-import dotenv from "dotenv";
 import proxy from "express-http-proxy"
 import cors from "cors"
 import morgan from "morgan";
@@ -7,7 +7,6 @@ import cookieParser from "cookie-parser";
 import { getCurrentUser } from "./controllers/user.controller.js";
 import { isAuth } from "./middleware/isAuth.js";
 import { proxyWithHeaders } from "./utils/proxyWithHeaders.js";
-dotenv.config();
 
 const app = express();
 
